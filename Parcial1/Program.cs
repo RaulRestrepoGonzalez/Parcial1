@@ -11,9 +11,9 @@ namespace Parcial1
     public class Program
     {
         PersonaService personaService = new PersonaService();
+        
 
-
-        public void Main(string[] args)
+        static void Main(string[] args)
         {
 
             Console.WriteLine("Digite la opcion: ");
@@ -61,8 +61,7 @@ namespace Parcial1
             personas.Edad = int.Parse(Console.ReadLine());
 
             string mensaje = personaService.Guardar(personas);
-            Console.ReadKey();
-
+            return personas;
         }
 
         public void EliminarPersonba() { }
