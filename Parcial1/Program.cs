@@ -10,11 +10,10 @@ namespace Parcial1
 {
     public class Program
     {
-        PersonaService personaService = new PersonaService();
-        
 
         static void Main(string[] args)
         {
+            PersonaService personaService = new PersonaService();
 
             Console.WriteLine("Digite la opcion: ");
             Console.WriteLine("1.Guardar");
@@ -27,16 +26,29 @@ namespace Parcial1
             switch (Console.Read())
             {
                 case 1:
-                    GuardarPersona();
+                    Console.Clear();
+                    Persona personas = new Persona();
+
+                    Console.WriteLine("Digite el ID: ");
+                    personas.Id = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Digite el nombre: ");
+                    personas.Nombre = Console.ReadLine();
+                    Console.WriteLine("Digite el tipo de sangre: ");
+                    personas.TipoSangre = Console.ReadLine();
+                    Console.WriteLine("Digite la edad: ");
+                    personas.Edad = int.Parse(Console.ReadLine());
+
+                    string mensaje = personaService.Guardar(personas);
                     break;
                 case 2:
-                    EliminarPersonba();
+                    //EliminarPersonba();
                     break;
                 case 3:
-                    ConsultarPersona();
+                    Console.Clear();
+                    personaService.Consultar();
                     break;
                 case 4:
-                    ModificarPersona();
+                    //ModificarPersona();
                     break;
                 case 5:
                     Environment.Exit(0);
@@ -45,36 +57,6 @@ namespace Parcial1
 
             Console.ReadKey();
         }
-
-        public void GuardarPersona()
-        {
-            Console.Clear();
-            Persona personas = new Persona();
-
-            Console.WriteLine("Digite el ID: ");
-            personas.Id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite el nombre: ");
-            personas.Nombre = Console.ReadLine();
-            Console.WriteLine("Digite el tipo de sangre: ");
-            personas.TipoSangre = Console.ReadLine();
-            Console.WriteLine("Digite la edad: ");
-            personas.Edad = int.Parse(Console.ReadLine());
-
-            string mensaje = personaService.Guardar(personas);
-            return personas;
-        }
-
-        public void EliminarPersonba() { }
-
-        public void ConsultarPersona() 
-        {
-            Console.Clear();
-            personaService.Consultar();
-
-            Console.ReadKey();
-        }
-
-        public void ModificarPersona() { }
 
     }
 }

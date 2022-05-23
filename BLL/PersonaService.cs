@@ -62,6 +62,20 @@ namespace BLL
 
         }
 
+        public Persona EliminarPorIdentificacion(int Id)
+        {
+
+            //foreach (var item in Consultar().Personas)
+            //{
+            //    if (item.Id.Equals(Id))
+            //    {
+            //        PersonaRepository.Eliminar(Id);
+            //        return item;
+            //    }
+            //}
+            //return null;
+        }
+
         public class ConsultaResponse
         {
             public List<Persona> Personas { get; set; }

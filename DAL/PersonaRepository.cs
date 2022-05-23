@@ -38,9 +38,9 @@ namespace DAL
             return persona;
         }
 
-        public void Eliminar(Persona persona)
+        public void Eliminar(int Id)
         {
-            //persona.Remove(persona);
+            
         }
 
         private static Persona MapearPersona(string linea)
