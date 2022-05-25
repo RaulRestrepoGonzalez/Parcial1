@@ -10,7 +10,7 @@ namespace DAL
 {
     public class PersonaRepository
     {
-
+        
         string ruta = "Personas.txt";
 
         public void Guardar(Persona persona)
@@ -40,7 +40,54 @@ namespace DAL
 
         public void Eliminar(int Id)
         {
-            
+            List<Persona> personas = new List<Persona>();
+            personas.Clear();
+            personas = Consultar();
+            FileStream fileStream = new FileStream(ruta, FileMode.Create);
+            fileStream.Close();
+            foreach (var item in personas)
+            {
+                if (item.Id != Id)
+                {
+                    Guardar(item);
+                }
+            }
+        }
+
+        public void Modificar(int Id, int Edad)
+        {
+            List<Persona> personas = new List<Persona>();
+            personas.Clear();
+            personas = Consultar();
+            FileStream fileStream = new FileStream(ruta, FileMode.Create);
+            fileStream.Close();
+            foreach (var item in personas)
+            {
+                if (item.Id == Id)
+                {
+                    item.Edad = Edad;   
+                    Guardar(item);
+                }
+                else
+                {
+                    Guardar(item);
+                }
+            }
+        }
+
+        public Persona Buscar(int Id)
+        {
+            List<Persona> personas = new List<Persona>();
+            personas.Clear();
+            personas = Consultar();
+            foreach (var item in personas)
+            {
+                if (item.Id.Equals(Id))
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         private static Persona MapearPersona(string linea)

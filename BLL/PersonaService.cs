@@ -51,29 +51,57 @@ namespace BLL
 
         public ConsultaResponse Consultar()
         {
+            ConsultaResponse response;
+
             try
             {
-                return new ConsultaResponse(personaRepository.Consultar());
+                response = new ConsultaResponse(personaRepository.Consultar());
+                return response;
             }
             catch (Exception exception)
             {
-                return new ConsultaResponse("Se presentó el siguiente error:" + exception.Message);
+                response = new ConsultaResponse("Se presentó el siguiente error:" + exception.Message);
+                response.Personas = null;
+                return response;
             }
 
         }
 
-        public Persona EliminarPorIdentificacion(int Id)
+        public string Eliminar(int Id)
         {
+            try
+            {
+                if (personaRepository.Buscar(Id) != null)
+                {
+                    personaRepository.Eliminar(Id);
+                    return $"se elimino la liquidacion numero: {Id} correctamente";
+                }
+                return $"El numero de liquidacion no esta registrado en el sistema";
+            }
+            catch (Exception e)
+            {
+                return $"ERROR" + e.Message;
+            }
+        }
 
-            //foreach (var item in Consultar().Personas)
-            //{
-            //    if (item.Id.Equals(Id))
-            //    {
-            //        PersonaRepository.Eliminar(Id);
-            //        return item;
-            //    }
-            //}
-            //return null;
+        public string Modificar(int Id, int Edad)
+        {
+            try
+            {
+                if (personaRepository.Buscar(Id) != null)
+                {
+                    personaRepository.Modificar(Id, Edad);
+                    return $"la liquidacion numero: {Id} ha sido modificada con exito!";
+
+                }
+                return $"El numero de liquidacion: {Id} no se encuentra registrada por favor verifique los datos";
+
+            }
+            catch (Exception e)
+            {
+
+                return "Error de datos" + e.Message;
+            }
         }
 
         public class ConsultaResponse

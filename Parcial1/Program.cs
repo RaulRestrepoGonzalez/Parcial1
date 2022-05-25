@@ -15,45 +15,79 @@ namespace Parcial1
         {
             PersonaService personaService = new PersonaService();
 
-            Console.WriteLine("Digite la opcion: ");
-            Console.WriteLine("1.Guardar");
-            Console.WriteLine("2.Eliminar");
-            Console.WriteLine("3.Consultar");
-            Console.WriteLine("4.Modificar");
-            Console.WriteLine("5.Salir");
-            Console.Read();
+            int cont = 0;
 
-            switch (Console.Read())
+            while (cont == 0)
             {
-                case 1:
-                    Console.Clear();
-                    Persona personas = new Persona();
+                Console.Clear();
+                Console.WriteLine("Digite la opcion: ");
+                Console.WriteLine("1.Guardar");
+                Console.WriteLine("2.Eliminar");
+                Console.WriteLine("3.Consultar");
+                Console.WriteLine("4.Modificar");
+                Console.WriteLine("5.Salir");
+                
 
-                    Console.WriteLine("Digite el ID: ");
-                    personas.Id = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Digite el nombre: ");
-                    personas.Nombre = Console.ReadLine();
-                    Console.WriteLine("Digite el tipo de sangre: ");
-                    personas.TipoSangre = Console.ReadLine();
-                    Console.WriteLine("Digite la edad: ");
-                    personas.Edad = int.Parse(Console.ReadLine());
+                switch (Int32.Parse(Console.ReadLine()))
+                {
+                    case 1:
+                        Console.Clear();
+                        Persona personas = new Persona();
 
-                    string mensaje = personaService.Guardar(personas);
-                    break;
-                case 2:
-                    //EliminarPersonba();
-                    break;
-                case 3:
-                    Console.Clear();
-                    personaService.Consultar();
-                    break;
-                case 4:
-                    //ModificarPersona();
-                    break;
-                case 5:
-                    Environment.Exit(0);
-                    break;
+                        Console.WriteLine("Digite el ID: ");
+                        personas.Id = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Digite el nombre: ");
+                        personas.Nombre = Console.ReadLine();
+                        Console.WriteLine("Digite el tipo de sangre: ");
+                        personas.TipoSangre = Console.ReadLine();
+                        Console.WriteLine("Digite la edad: ");
+                        personas.Edad = int.Parse(Console.ReadLine());
+
+                        string mensaje = personaService.Guardar(personas);
+                        break;
+                    case 2:
+                        Console.Clear();
+
+                        Console.WriteLine("Digite el ID: ");
+                        int Id = int.Parse(Console.ReadLine());
+
+                        personaService.Eliminar(Id);
+                        break;
+                    case 3:
+                        Console.Clear();
+
+                        if (personaService.Consultar().Personas != null)
+                        {
+                            foreach (var item in personaService.Consultar().Personas)
+                            {
+                                Console.WriteLine("----------------------------------");
+                                Console.WriteLine($"Id: {item.Id}");
+                                Console.WriteLine($"Nombre: {item.Nombre}");
+                                Console.WriteLine($"Tipo de sangre: {item.TipoSangre}");
+                                Console.WriteLine($"Edad: {item.Edad}");
+                            }
+                        }else
+                        {
+                            Console.WriteLine(personaService.Consultar().Mensaje);
+                        }
+                        break;
+                    case 4:
+                        Console.Clear();
+
+                        Console.WriteLine("Digite el ID: ");
+                        Id = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Digite la edad: ");
+                        int Edad = int.Parse(Console.ReadLine());
+
+                        personaService.Modificar(Id, Edad);
+                        break;
+                    case 5:
+                        Environment.Exit(cont = 1);
+                        break;
+                }
+
             }
+            
 
             Console.ReadKey();
         }
