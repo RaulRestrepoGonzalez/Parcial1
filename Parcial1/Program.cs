@@ -19,14 +19,14 @@ namespace Parcial1
 
             while (cont == 0)
             {
-                Console.Clear();
+                Console.WriteLine("----------------------------------");
                 Console.WriteLine("Digite la opcion: ");
                 Console.WriteLine("1.Guardar");
                 Console.WriteLine("2.Eliminar");
                 Console.WriteLine("3.Consultar");
                 Console.WriteLine("4.Modificar");
                 Console.WriteLine("5.Salir");
-                
+                Console.WriteLine("----------------------------------");
 
                 switch (Int32.Parse(Console.ReadLine()))
                 {
